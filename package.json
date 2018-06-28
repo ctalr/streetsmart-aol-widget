@@ -7,10 +7,16 @@
     "gulp": "^3.9.1",
     "gulp-babel": "^7.0.1",
     "gulp-cli": "^2.0.1",
-    "gulp-livereload": "^3.8.1"
+    "gulp-livereload": "^3.8.1",
+    "gulp-replace": "^1.0.0",
+    "gulp-serve": "^1.4.0",
+    "gulp-webserver": "^0.9.1"
   },
   "scripts": {
+    "compile-proxy": "gulp compile-proxy",
     "start": "gulp watch",
+    "serve": "gulp webserver",
+    "babel": "gulp babel",
     "build": "gulp"
   }
 }

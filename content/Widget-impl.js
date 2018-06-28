@@ -60,7 +60,7 @@ require(REQUIRE_CONFIG, [], function () {
                 this.wkid = parseInt(this.config.srs.split(':')[1]);
 
                 utils.setProj4(CM.Proj4.getProj4());
-
+                
                 this._recordingClient = new RecordingClient({
                     config: this.config,
                     apiKey: this._apiKey,
