@@ -1,0 +1,74 @@
+#panoramaViewerDiv {
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+#zoom-warning {
+    background: white;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    height: 50px;
+    margin-top: -25px;
+}
+
+.hidden {
+    display: none;
+}
+
+.jimu-widget-streetsmartview {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+
+.cmt {
+    background: none !important;
+}
+
+.cmt .window-manager-container .window{
+    margin : 0px !important;
+}
+
+.cmt .window-manager-container{
+    padding : 0px !important;
+}
+
+#addGeoJsonBtn{
+    background-image: url('../images/addJson.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#addGeoJsonBtn:hover{
+    background-image: url('../images/addHoverJson.png') !important;
+    background-repeat: no-repeat;
+}
+
+#addMapDropBtn{
+    background-image: url('../images/mapDrop.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#addMapDropBtn:hover{
+    background-image: url('../images/mapDropHover.png') !important;
+    background-repeat: no-repeat;
+}
+
+#uploadJsonBtn{
+    display: none;
+}
+
+.claro .dijitTooltipContainer{
+    background-color: black !important;
+    background-image: none !important;
+    color : white !important;
+    border :  none !important;
+}
