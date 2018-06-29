@@ -6,13 +6,13 @@ var webserver = require('gulp-webserver');
 require('dotenv').config();
 
 console.log('> WIDGET DIRECTORY: ', process.env.WIDGET_DIR);
-console.log('> REMOTE DIRECTORY: ', process.env.REMOTE_DIR);
+console.log('> CONTENT URL: ', process.env.CONTENT_URL);
 
-
-gulp.task('compile-proxy', function() {
+gulp.task('build-proxy', function() {
+    console.log('> HENK', process.env.HENK);
     // Copy everything to dist/proxy
     const task = gulp.src(['proxy/**/*.*'], { base: 'proxy' })
-        .pipe(replace('{{{REMOTE_DIR}}}', process.env.REMOTE_DIR))
+        .pipe(replace('{{{CONTENT_URL}}}', process.env.CONTENT_URL))
         .pipe(gulp.dest('dist/proxy'));
 
     if (process.env.WIDGET_DIR) {
@@ -22,7 +22,6 @@ gulp.task('compile-proxy', function() {
 });
 
 gulp.task('build-content', function() {
-    console.log('buid content');
     return gulp.src([
         'content/**/*.js', '!**/*___jb_old___'
     ])
@@ -34,7 +33,7 @@ gulp.task('reload', function() {
     return gulp.src(['dist/content/**/*.js']).pipe(livereload());
 });
 
-gulp.task('default', ['babel']);
+gulp.task('default', ['watch']);
 
 gulp.task('watch', function() {
     livereload.listen();

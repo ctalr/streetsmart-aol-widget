@@ -13,10 +13,8 @@
     "gulp-webserver": "^0.9.1"
   },
   "scripts": {
-    "compile-proxy": "gulp compile-proxy",
-    "start": "gulp watch",
-    "serve": "gulp webserver",
-    "babel": "gulp babel",
-    "build": "gulp"
+    "build-proxy": "gulp build-proxy",
+    "build-content": "gulp build-content",
+    "start": "gulp"
   }
 }
