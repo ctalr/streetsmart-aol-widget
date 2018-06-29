@@ -1,0 +1,53 @@
+.settings-street-smart{
+	width:100%;
+	height:100%;
+	border-top: 30px solid #98C23C;
+	overflow-y: auto;
+}
+
+.settingsForm{
+	margin: 20px;
+}
+
+.settingsBox{
+	border-radius: 2px;
+	border: 1px solid #b5bcc7;
+	height: 25px;
+	padding: 5px;
+	font-size: 14px;
+}
+
+.settingsLabel{
+	width: 225px;
+	margin-right: 10px;
+	display: inline-block;
+    text-align: right;
+}
+
+.settingSelect{
+    border-radius: 2px;
+}
+
+.headAgree{
+	background-color: #98C23C;
+	color: white;
+	text-align: center;
+	font-weight: bold;
+	height: 30px;
+	padding: 5px;
+}
+
+.agreementLabel{
+	margin-top: 10px;
+}
+
+
+[type="checkbox"]{
+	vertical-align:middle;
+}
+
+.versionLabel{
+	text-align: right;
+	margin: 6%;
+	color: lightgray;
+}

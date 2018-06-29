@@ -1,4 +1,4 @@
-﻿define(
+define(
    ({
        username: "Nom d'utilisateur",
        password: "mot de passe",

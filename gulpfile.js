@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var babel = require('gulp-babel');
 var replace = require('gulp-replace');
 var livereload = require('gulp-livereload');
+var gulpif = require('gulp-if');
 var webserver = require('gulp-webserver');
 require('dotenv').config();
 
@@ -9,7 +10,6 @@ console.log('> WIDGET DIRECTORY: ', process.env.WIDGET_DIR);
 console.log('> CONTENT URL: ', process.env.CONTENT_URL);
 
 gulp.task('build-proxy', function() {
-    console.log('> HENK', process.env.HENK);
     // Copy everything to dist/proxy
     const task = gulp.src(['proxy/**/*.*'], { base: 'proxy' })
         .pipe(replace('{{{CONTENT_URL}}}', process.env.CONTENT_URL))
@@ -23,9 +23,9 @@ gulp.task('build-proxy', function() {
 
 gulp.task('build-content', function() {
     return gulp.src([
-        'content/**/*.js', '!**/*___jb_old___'
+        'content/**/*.*', '!**/*___jb_old___'
     ])
-        .pipe(babel())
+        .pipe(gulpif(/.*.js/, babel()))
         .pipe(gulp.dest('dist/content'))
 });
 
