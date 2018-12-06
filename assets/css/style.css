@@ -15,6 +15,10 @@
     margin-top: -25px;
 }
 
+.cmt .mosaic-tile{
+    margin: 0px;
+}
+
 .hidden {
     display: none !important;
 }
@@ -77,7 +81,7 @@
     position: absolute;
     top: 10px;
     color: white;
-    z-index: 1;
+    z-index: 2;
     left: 0;
     font-size: 15px;
     text-align: center;

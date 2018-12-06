@@ -153,7 +153,7 @@ define([
         }
 
         updateViewingCone(panoramaViewer) {
-            const viewer = panoramaViewer._viewer;
+            const viewer = panoramaViewer._panoramaViewer;
             const recording = viewer._activeRecording;
             if (!recording || !recording.xyz) {
                 return;
