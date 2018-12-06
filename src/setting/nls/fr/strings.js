@@ -25,6 +25,7 @@
        zoomoutButton: 'Bouton Zoom-out',
 
        typeSrs: "Tapez ou sélectionnez SRS",
-       version: "Street Smart Widget pour Web AppBuilder @ version 18.2"
-  })
+       version: "Street Smart Widget pour Web AppBuilder @ version 18.2",
+       linkMapMove: 'Center panorama in map',
+   })
 );

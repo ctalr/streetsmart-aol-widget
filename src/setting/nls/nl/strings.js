@@ -24,6 +24,7 @@
        zoomoutButton: 'Zoom-out Knop',
 
        typeSrs: "Typ of selecteer SRS",
-       version: "Street Smart Widget voor Web AppBuilder @ versie 18.2"
+       version: "Street Smart Widget voor Web AppBuilder @ versie 18.2",
+       linkMapMove: 'Centreer cyclorama in kaart',
    })
 );
