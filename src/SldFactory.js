@@ -27,23 +27,31 @@ define([
             const mapLayer = this.mapLayer;
             const renderer = mapLayer.renderer;
             if (renderer instanceof SimpleRenderer) {
+                const symbol = _.cloneDeep(renderer.getSymbol());
+                if(symbol.color) symbol.color.a *= mapLayer.opacity;
+                if(symbol.outline && symbol.outline.color) symbol.outline.color.a *= mapLayer.opacity;
                 return [{
                     filter: null, // Every symbol is the same, so no filtering needed
-                    symbol: renderer.getSymbol(),
+                    symbol,
                     geometryType: mapLayer.geometryType,
                 }];
             }
             if (renderer instanceof UniqueValueRenderer) {
                 const attribute = renderer.attributeField;
 
-                const specialCases = renderer.infos.map((uniqueValue) => ({
-                    filter: {
-                        value: uniqueValue.value,
-                        attribute,
-                    },
-                    symbol: uniqueValue.symbol,
-                    geometryType: mapLayer.geometryType,
-                }));
+                const specialCases = renderer.infos.map((uniqueValue) => {
+                    const symbol = _.cloneDeep(uniqueValue.symbol);
+                    if(symbol.color) symbol.color.a *= mapLayer.opacity;
+                    if(symbol.outline && symbol.outline.color) symbol.outline.color.a *= mapLayer.opacity;
+                    return {
+                        filter: {
+                            value: uniqueValue.value,
+                            attribute,
+                        },
+                        symbol,
+                        geometryType: mapLayer.geometryType,
+                    }
+                });
 
                 // Add the "else" symbol (default case) to the list
                 if (renderer.defaultSymbol) {
