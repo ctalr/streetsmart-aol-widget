@@ -10,6 +10,7 @@
        measure: "Metingen",
        overlay: "Overlays",
        timetravel: 'Time Travel',
+       streetName: 'Toon straatnaam',
 
        navigation: "Navigatie",
        navigationButtons: 'Navigatie Knoppen',

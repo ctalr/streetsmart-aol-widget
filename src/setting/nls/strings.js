@@ -10,6 +10,7 @@ define({
       measure: "Measurements",
       overlay: "Overlays",
       timetravel: 'Time Travel',
+      streetName: 'Show street name',
 
       navigation: "Navigation",
       navigationButtons: 'Navigation Buttons',

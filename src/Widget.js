@@ -16,7 +16,11 @@ require(REQUIRE_CONFIG, [], function () {
         'dojo/dom',
         'dijit/Tooltip',
         'jimu/BaseWidget',
+        'esri/geometry/Point',
         'esri/geometry/ScreenPoint',
+        'esri/tasks/locator',
+        "esri/geometry/webMercatorUtils",
+        'esri/SpatialReference',
         'https://streetsmart.cyclomedia.com/api/v18.7/StreetSmartApi.js',
         './utils',
         './RecordingClient',
@@ -29,7 +33,11 @@ require(REQUIRE_CONFIG, [], function () {
         dom,
         Tooltip,
         BaseWidget,
+        Point,
         ScreenPoint,
+        Locator,
+        webMercatorUtils,
+        SpatialReference,
         StreetSmartApi,
         utils,
         RecordingClient,
@@ -60,6 +68,12 @@ require(REQUIRE_CONFIG, [], function () {
                 this.wkid = parseInt(this.config.srs.split(':')[1]);
 
                 utils.setProj4(CM.Proj4.getProj4());
+
+                this._locator = new Locator("https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer");
+
+                if(!this.config.showStreetName){
+                    this.streetIndicatorContainer.classList.add('hidden');
+                }
 
                 this._recordingClient = new RecordingClient({
                     config: this.config,
@@ -140,7 +154,14 @@ require(REQUIRE_CONFIG, [], function () {
             _handleMeasurementChanged(e) {
                 const newViewer = e.detail.panoramaViewer;
                 this._handleViewerChanged(newViewer);
-                this._measurementHandler.draw(e)
+                this._measurementHandler.draw(e);
+                if(this.config.showStreetName) {
+                    if (e.detail.activeMeasurement) {
+                        this.streetIndicatorContainer.classList.add('hidden');
+                    } else {
+                        this.streetIndicatorContainer.classList.remove('hidden');
+                    }
+                }
             },
 
             /**
@@ -262,6 +283,18 @@ require(REQUIRE_CONFIG, [], function () {
                 if (this.config.overlay === true) {
                     this._overlayManager.addOverlaysToViewer();
                 }
+
+                const rec = this._panoramaViewer.getRecording();
+                const xyz = rec.xyz;
+                const srs = rec.srs;
+                const point = new Point(xyz[0], xyz[1], new SpatialReference(Number(srs.split(':')[1])));
+                const location = utils.transformProj4js(point, 102100);
+                this._locator.locationToAddress(location, 0, (result) => {
+                    const el = this.streetIndicator;
+                    if(el){
+                        el.innerHTML = result.address.ShortLabel;
+                    }
+                });
             },
 
             _handleExtentChange() {
@@ -362,6 +395,7 @@ require(REQUIRE_CONFIG, [], function () {
             onClose() {
                 StreetSmartApi.destroy({ targetElement: this.panoramaViewerDiv });
                 this.loadingIndicator.classList.remove('hidden');
+                this.streetIndicator.innerHTML = '';
                 this._overlayManager.reset();
                 this._removeEventListeners();
                 this._layerManager.removeLayers();

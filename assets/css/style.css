@@ -16,7 +16,7 @@
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .jimu-widget-streetsmartview {
@@ -70,6 +70,45 @@
     background-image: none !important;
     color : white !important;
     border :  none !important;
+}
+
+.street-indicator{
+    right: 0;
+    position: absolute;
+    top: 10px;
+    color: white;
+    z-index: 1;
+    left: 0;
+    font-size: 15px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.street-indicator span {
+    color: #fff;
+    text-align: center;
+    font-size: 15px;
+    font-family: Lato,Helvetica Neue,Helvetica,Arial,sans-serif;
+    height: auto;
+    margin: 0;
+}
+
+.address-bar {
+    position: absolute;
+    margin: auto;
+    background-color: rgb(152, 194, 60);
+    padding: 2px;
+    border-radius: 5px;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+}
+
+.inner-address-bar {
+    padding: 3px;
+    border: 1px solid #fff;
+    border-radius: 3px;
 }
 
 .dart-panel .jimu-widget-frame.jimu-container .cmt *,

@@ -10,6 +10,8 @@
        measure: "Messungen",
        overlay: "Überlagerungen",
        timetravel: 'Zeitreise',
+       streetName: 'Show street name',
+
 
        navigation: "Navigation",
        navigationButtons: 'Navigation Buttons',
