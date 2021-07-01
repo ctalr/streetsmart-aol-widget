@@ -12,6 +12,7 @@
        agreement2: "Gebruiksvoorwaarden voor Street Smart.",
        headAgreement: "Gebruiksvoorwaarden",
        measure: "Metingen",
+       toggleAll: "Alles Inschakelen / Uitschakelen",
        overlay: "Overlays",
        timetravel: 'Time Travel',
        streetName: 'Toon straatnaam',

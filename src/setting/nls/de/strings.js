@@ -12,6 +12,7 @@
        agreement2: "Allgemeine Nutzungsbedingungen für Street Smart.",
        headAgreement: "Allgemeine Nutzungsbedingungen",
        measure: "Messungen",
+       toggleAll: "Alle Aktivieren / Deaktivieren",
        overlay: "Überlagerungen",
        timetravel: 'Zeitreise',
        streetName: 'Straßenname',

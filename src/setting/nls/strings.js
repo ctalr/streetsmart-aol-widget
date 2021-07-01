@@ -12,6 +12,7 @@ define({
       agreement2: "User Terms And Conditions For Street Smart.",
       headAgreement: "User Agreement",
       measure: "Measurements",
+      toggleAll: "Enable / Disable All",
       overlay: "Overlays",
       timetravel: 'Time Travel',
       streetName: 'Show street name',

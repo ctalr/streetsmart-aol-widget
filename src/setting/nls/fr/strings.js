@@ -12,6 +12,7 @@
        agreement2: "Termes et conditions de l'utilisateur pour Street Smart.",
        headAgreement: "Accord de l'utilisateur",
        measure: "Mesures",
+       toggleAll: "Activer / Désactiver Tout",
        overlay: "Superpositions",
        timetravel: 'Historique',
        streetName: 'Visualiser les noms de rues',

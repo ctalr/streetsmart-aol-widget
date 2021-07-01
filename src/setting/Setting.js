@@ -42,6 +42,13 @@ define([
                         agreementPane.style.display = 'block';
                     });
                 });
+                on(dom.byId('toggleAll'), 'click', function(){
+                    require(["dojo/query", "dojo/NodeList-dom"], function(query){
+                        query('input[type="checkbox"]').forEach(function(node){
+                            node.checked = dom.byId('toggleAll').checked;
+                        });
+                    });
+                });
 
             },
 
