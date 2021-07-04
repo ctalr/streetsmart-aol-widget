@@ -417,7 +417,7 @@ require(REQUIRE_CONFIG, [], function () {
             _openApiWhenZoomedIn() {
                 this.zoomWarning.classList.remove('hidden');
                 const listener = this.addEventListener(this.map, 'zoom-end', (zoomEvent) => {
-                    if (zoomEvent.level > this._zoomThreshold) {
+                    if (this.map.getScale() < this._zoomThreshold) {
                         this.zoomWarning.classList.add('hidden');
                         this._initApi();
                         this.removeEventListener(listener);
@@ -564,7 +564,7 @@ require(REQUIRE_CONFIG, [], function () {
                 if (!this.config.navigation) {
                     return;
                 }
-                if (this.map.getZoom() > this._zoomThreshold) {
+                if (this.map.getScale() < this._zoomThreshold) {
                     this._recordingClient.load().then((response) => {
                         this._layerManager.updateRecordings(response);
                     });
@@ -627,13 +627,8 @@ require(REQUIRE_CONFIG, [], function () {
             },
 
             _determineZoomThreshold: function () {
-                const maxMapZoom = this.map.getMaxZoom();
-                let zoomThreshold = maxMapZoom - 3;
-
-                if (maxMapZoom > 20) {
-                    zoomThreshold = maxMapZoom - 5;
-                }
-                this._zoomThreshold = zoomThreshold;
+                // Excplcit zoom level replaced for zoom scale values for consistency.
+                this._zoomThreshold = 1200;
                 return zoomThreshold;
             },
 
@@ -644,10 +639,10 @@ require(REQUIRE_CONFIG, [], function () {
             },
 
             onOpen() {
-                const zoomLevel = this.map.getZoom();
+                const zoomLevel = this.map.getScale();
 
-                // Only open when the zoomThreshold is reached.
-                if (zoomLevel > this._zoomThreshold) {
+                // Only open when the current zoom scale is close enough to the ground.
+                if (zoomLevel < this._zoomThreshold) {
                     this._initApi();
                 } else {
                     this._openApiWhenZoomedIn();
