@@ -628,7 +628,9 @@ require(REQUIRE_CONFIG, [], function () {
 
             _determineZoomThreshold: function () {
                 // Excplcit zoom level replaced for zoom scale values for consistency.
-                this._zoomThreshold = 1200;
+                let zoomThreshold = 1200;
+
+                this._zoomThreshold = zoomThreshold;
                 return zoomThreshold;
             },
 
