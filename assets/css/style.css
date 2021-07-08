@@ -328,3 +328,10 @@
 .dart-panel .jimu-widget-frame.jimu-container #panoramaViewerDiv .cmt .measurement-floating-panel .warning span {
     color: #ec7a08 !important
 }
+
+.esriPopupWrapper .titlePane {
+    cursor: move;
+}
+.esriPopupWrapper .pointer {
+    display: none !important;
+}

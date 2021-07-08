@@ -1,11 +1,13 @@
 define([
     'esri/dijit/AttributeInspector',
     'esri/geometry/Point',
+    'esri/geometry/ScreenPoint',
     "esri/dijit/InfoWindow",
     "dojo/dom-construct",
+    'dojo/dnd/Moveable',
     "dijit/form/Button",
     'esri/request',
-], function (AttributeInspector, Point, InfoWindow, domConstruct, Button, esriRequest) {
+], function (AttributeInspector, Point, ScreenPoint, InfoWindow, domConstruct, Moveable, Button, esriRequest) {
     return class AttributeManager {
         constructor({ map, widget, wkid, config, nls, api}) {
             this.map = map;
@@ -82,6 +84,13 @@ define([
                 this.selectedFeature = evt.feature;
             });
 
+            const windowToMove = this.map.infoWindow.domNode;
+            require(["dojo/query", "dojo/NodeList-dom"], function(query){
+                const handle = query(".title", windowToMove)[0];
+                const dnd = new Moveable(windowToMove, {
+                    handle: handle
+                });
+            });
 
             return this.inspector
         }
@@ -92,12 +101,13 @@ define([
         }
 
         _showInfoWindow(feature){
+
             const extent = feature.geometry.getExtent && feature.geometry.getExtent();
             const centroid = (extent && extent.getCenter()) || feature.geometry;
             this.map.infoWindow.resize(350, 240);
-            this.map.infoWindow.show(new Point (centroid));
+            this.map.infoWindow.show(new ScreenPoint((window.innerWidth - 50), 20));
             this.map.infoWindow.setTitle('');
-            this.map.centerAt(centroid)
+            //this.map.centerAt(centroid)
         }
 
         showInfoOfFeature(feature){
