@@ -190,15 +190,20 @@ define([
                 if (item) {
                     for (const request of item.req) {
                         const token = request.mapLayer.credential &&  request.mapLayer.credential.token;
+
+                        let knownFeatureIds = [];
+                        for (const reqFeature of request.mapLayer.toJson().featureSet.features) {
+                            knownFeatureIds.push(reqFeature.attributes[request.mapLayer.objectIdField]);
+                        }
+
                         const options = {
                             url: `${request.mapLayer.url}/query?`,
                             content: {
                                 f: 'json',
                                 returnGeometry: true,
                                 returnZ: true,
-                                spatialRel: 'esriSpatialRelIntersects',
                                 outFields: '*',
-                                geometry: JSON.stringify(request.mapLayer.fullExtent),
+                                objectIds: [...knownFeatureIds],
                                 outSR: this.wkid
                             }
                         };
@@ -380,13 +385,13 @@ define([
 
             for (const featureS in arcgisFeatureSet.features) {
                 const updateFeature = arcgisFeatureSet.features[featureS];
-                const objectId = updateFeature.attributes.OBJECTID;
+                const objectId = updateFeature.attributes[mapLayer.objectIdField];
 
                 if (featureSet && featureSet.features) {
                     for (const featureZ in featureSet.features) {
                         const fromFeature = featureSet.features[featureZ];
 
-                        if (fromFeature && objectId === fromFeature.attributes.OBJECTID) {
+                        if (fromFeature && objectId === fromFeature.attributes[mapLayer.objectIdField]) {
                             if (arcgisFeatureSet.geometryType === 'esriGeometryPoint') {
                                 const z = fromFeature.geometry && fromFeature.geometry.z;
 
@@ -497,12 +502,7 @@ define([
                 features.push(updateFeature);
             }
 
-            //arcgisFeatureSet.features = features;
-
-            // Handle cases where the incoming FeatureSet has the majority data after this point.
-            if (featureSet && featureSet.features && featureSet.features.length > arcgisFeatureSet.features.length) {
-                arcgisFeatureSet = featureSet;
-            }
+            arcgisFeatureSet.features = features;
 
             const geojson = geoJsonUtils.arcgisToGeoJSON(arcgisFeatureSet, undefined, dates);
 
