@@ -131,6 +131,13 @@ define([
                     }
                 }
 
+                if(this.config.toggleAll){
+                    this.everythingEnabled.value = this.config.toggleAll;
+                    if(this.config.toggleAll === true) {
+                        this.everythingEnabled.checked = true;
+                    }
+                }
+
                 if(this.config.buttonVisibility){
                     const bv = this.config.buttonVisibility;
                     if(bv.OVERLAYS !== undefined) this.overlaysButtonEnable.checked = !!bv.OVERLAYS;
@@ -158,6 +165,7 @@ define([
                 this.config.navigation = this.navigationEnable.checked;
                 this.config.timetravel = this.timetravelEnable.checked;
                 this.config.showStreetName = this.enableStreetname.checked;
+                this.config.toggleAll = this.everythingEnabled.checked;
                 this.config.buttonVisibility = {
                     OVERLAYS: this.overlaysButtonEnable.checked,
                     ELEVATION: this.elevationButtonEnable.checked,
