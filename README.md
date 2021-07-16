@@ -30,7 +30,7 @@ Add [this plugin](https://chrome.google.com/webstore/detail/livereload/jnihajbhp
 
 ## Versioning
 
-Current version: **21.2.2**
+Current version: **21.2.3**
 
 We use YEAR.MAJOR.PATCH versioning.
 i.e.: 16.1.0 = year 2016, major version 1, patch 0.

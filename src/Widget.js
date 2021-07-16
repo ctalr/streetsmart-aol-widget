@@ -211,7 +211,6 @@ require(REQUIRE_CONFIG, [], function () {
             _handleMapClick(e) {
                 const mapFeature = e.graphic
                 if(!mapFeature) {
-                    this.map.infoWindow.hide()
                     return
                 }
 
