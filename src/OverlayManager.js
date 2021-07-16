@@ -330,6 +330,10 @@ define([
         reset() {
             this.overlays = [];
             this.overlaysByName = {}
+            this.requestQueue = [];
+            this.requestID = 0;
+            this.isQueueLoading = false;
+            this.reloadQueueOnFinish = false;
         }
 
         doesFeatureMatchCase(feature, sldCase) {

@@ -267,11 +267,42 @@ define([], function () {
         if (arcgis.features) {
             geojson.type = 'FeatureCollection';
             geojson.features = [];
-            for (var i = 0; i < arcgis.features.length; i++) {
-                const feature = arcgisToGeoJSON(arcgis.features[i], idAttribute, dates);
 
-                if (feature && feature.properties) {
-                    geojson.features.push(arcgisToGeoJSON(arcgis.features[i], idAttribute, dates));
+            // Handling for different representations of previously unsupported polylines.
+            if(arcgis.features.length === 1 && arcgis.features[0].geometry.paths ) {
+                for (var i = 0; i < arcgis.features[0].geometry.paths.length; i++) {
+
+                    const artificialPath = {attributes:arcgis.features[0].attributes, geometry:{paths:[arcgis.features[0].geometry.paths[i]]}};
+                    const feature = arcgisToGeoJSON(artificialPath, idAttribute, dates);
+
+                    if (feature && feature.properties) {
+                        geojson.features.push(feature);
+                    }
+                }
+            }
+            else {
+                for (var i = 0; i < arcgis.features.length; i++) {
+
+                    if(arcgis.features[i].geometry && arcgis.features[i].geometry.paths && arcgis.features[i].geometry.paths.length > 1) {
+
+                        for (var j = 0; j < arcgis.features[i].geometry.paths.length; j++) {
+
+                            const artificialPath = {attributes:arcgis.features[i].attributes, geometry:{paths:[arcgis.features[i].geometry.paths[j]]}};
+                            const feature = arcgisToGeoJSON(artificialPath, idAttribute, dates);
+
+                            if (feature && feature.properties) {
+                                geojson.features.push(feature);
+                            }
+                        }
+                    }
+                    else {
+
+                      const feature = arcgisToGeoJSON(arcgis.features[i], idAttribute, dates);
+
+                      if (feature && feature.properties) {
+                          geojson.features.push(feature);
+                      }
+                    }
                 }
             }
         }
@@ -331,7 +362,8 @@ define([], function () {
             arcgis.spatialReference.wkid &&
             arcgis.spatialReference.wkid !== 4326
         ) {
-            console.warn('Object converted in non-standard crs - ' + JSON.stringify(arcgis.spatialReference));
+            // Causes unnecessary log spam, debug purposes only.
+            //console.warn('Object converted in non-standard crs - ' + JSON.stringify(arcgis.spatialReference));
         }
 
         return geojson;
