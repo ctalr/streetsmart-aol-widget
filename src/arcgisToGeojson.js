@@ -269,12 +269,24 @@ define([], function () {
             geojson.features = [];
 
             // Handling for different representations of previously unsupported polylines.
-            if(arcgis.features[0] && arcgis.features[0].geometry && arcgis.features[0].geometry.paths ) {
+            if(arcgis.features.length === 1 && arcgis.features[0].geometry.paths ) {
 
-                for (let i = 0; i < arcgis.features.length; i++) {
-                    for (let j = 0; j < arcgis.features[i].geometry.paths.length; j++) {
+                if(arcgis.features[0].geometry.paths.length === 1 && arcgis.features[0].geometry.paths[0].length > 1) {
+                    for (let i = 0; i < arcgis.features[0].geometry.paths.length; i++) {
 
-                        const artificialPath = {attributes:arcgis.features[i].attributes, geometry:{paths:[arcgis.features[i].geometry.paths[j]]}};
+                        const artificialPath = {attributes:arcgis.features[0].attributes, geometry:{paths:[arcgis.features[0].geometry.paths[0][i]]}};
+                        const feature = arcgisToGeoJSON(artificialPath, idAttribute, dates);
+
+                        if (feature && feature.properties) {
+                            geojson.features.push(feature);
+                        }
+                    }
+                }
+                else {
+
+                    for (let i = 0; i < arcgis.features[0].geometry.paths.length; i++) {
+
+                        const artificialPath = {attributes:arcgis.features[0].attributes, geometry:{paths:[arcgis.features[0].geometry.paths[i]]}};
                         const feature = arcgisToGeoJSON(artificialPath, idAttribute, dates);
 
                         if (feature && feature.properties) {

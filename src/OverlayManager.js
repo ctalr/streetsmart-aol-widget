@@ -128,6 +128,8 @@ define([
             if(this.widget.config.overlays === false) return;
 
             this.removeOverlays();
+            this.isQueueLoading = false;
+            this.reloadQueueOnFinish = false;
 
             const mapLayers = _.values(this.map._layers);
             const featureLayers = _.filter(mapLayers, l => l.type === 'Feature Layer');
