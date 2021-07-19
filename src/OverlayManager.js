@@ -453,6 +453,9 @@ define([
                                                 }
                                             }
                                         }
+                                        else {
+                                            updatePaths[0][point] = thisPoint;
+                                        }
                                     }
                                 }
 
