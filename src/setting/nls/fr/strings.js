@@ -32,6 +32,6 @@
        zoomoutButton: 'Bouton Zoom-out',
 
        typeSrs: "Tapez ou sélectionnez SRS",
-       version: "Street Smart Widget pour Web AppBuilder @ version 21.2",
+       version: "Street Smart Widget pour Web AppBuilder @ version 21.3",
    })
 );
